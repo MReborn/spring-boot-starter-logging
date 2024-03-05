@@ -1,38 +1,31 @@
 package com.astlink.spring.boot.starter.springbootstarterlogging.aspect
 
-
 import com.astlink.spring.boot.starter.springbootstarterlogging.configuration.LoggingAutoConfiguration.Companion.logger
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.*
 
 
 @Aspect
-class LoggingAspect {
+class LoggingAspect() {
 
-
-    // @Pointcut("execution(* ru.astondevs.astlink.userservice.service.impl.*.*(..))")
-    @Pointcut("execution(* *(..))")
-    fun userServiceMethod() {
+    @Pointcut("@within(org.springframework.stereotype.Service)")
+    fun loggingServiceMethod() {
     }
 
-    @Pointcut("within(ru.astondevs.astlink.userservice.*)")
-    fun controllerAdviceMethods() {
-    }
-
-    @Before("userServiceMethod()")
+    @Before("loggingServiceMethod()")
     fun logBeforeMethodCall(joinPoint: JoinPoint) {
         val methodName = joinPoint.signature.name
         logger.info { "Вызван метод: $methodName" }
     }
 
-    @AfterReturning("userServiceMethod()")
+    @AfterReturning("loggingServiceMethod()")
     fun logAfterReturningMethodCall(joinPoint: JoinPoint) {
         val methodName = joinPoint.signature.name
         logger.info { "$methodName\" метод был завершен" }
     }
 
     @AfterThrowing(
-        pointcut = "controllerAdviceMethods()", throwing = "exception"
+        pointcut = "loggingServiceMethod()", throwing = "exception"
     )
     fun logAfterThrowing(joinPoint: JoinPoint, exception: Exception) {
         val methodName = joinPoint.signature.name
