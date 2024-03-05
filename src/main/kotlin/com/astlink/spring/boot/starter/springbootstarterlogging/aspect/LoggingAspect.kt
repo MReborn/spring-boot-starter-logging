@@ -1,14 +1,15 @@
 package com.astlink.spring.boot.starter.springbootstarterlogging.aspect
 
 
-import mu.KLogging
+
+import com.astlink.spring.boot.starter.springbootstarterlogging.configuration.LoggingAutoConfiguration.Companion.logger
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.*
 
 
 @Aspect
 class LoggingAspect {
-    companion object : KLogging()
+
 
 //    @Pointcut("execution(* ru.astondevs.astlink.userservice.service.impl.*.*(..))")
     @Pointcut("execution(* com.example.demo.*.*(..))")
