@@ -10,7 +10,7 @@ import org.aspectj.lang.annotation.*
 class LoggingAspect {
 
 
-    //    @Pointcut("execution(* ru.astondevs.astlink.userservice.service.impl.*.*(..))")
+    // @Pointcut("execution(* ru.astondevs.astlink.userservice.service.impl.*.*(..))")
     @Pointcut("execution(* *(..))")
     fun userServiceMethod() {
     }

@@ -18,7 +18,6 @@ import org.springframework.context.annotation.Configuration
 class LoggingAutoConfiguration {
     companion object : KLogging()
     @Bean
-    @ConditionalOnMissingBean
     fun loggingAspect(): LoggingAspect {
         return LoggingAspect()
     }
