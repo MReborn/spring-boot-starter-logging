@@ -4,7 +4,7 @@ import com.astlink.spring.boot.starter.springbootstarterlogging.configuration.Lo
 import jakarta.annotation.PostConstruct
 import org.springframework.boot.context.properties.ConfigurationProperties
 
-@ConfigurationProperties(prefix = "astlink")
+@ConfigurationProperties(prefix = "ast-link")
 class LoggingProperties {
     private var enabled: Boolean = true // для глобального включения/отключения стартера
 

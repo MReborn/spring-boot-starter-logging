@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 @EnableConfigurationProperties(LoggingProperties::class)
 @ConditionalOnClass(LoggingProperties::class)
-@ConditionalOnProperty(prefix = "astlink", value = ["enabled"], havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(prefix = "ast-link", value = ["enabled"], havingValue = "true", matchIfMissing = false)
 class LoggingAutoConfiguration {
     companion object : KLogging()
     @Bean

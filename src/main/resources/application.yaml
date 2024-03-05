@@ -1,3 +1,3 @@
-astlink:
-  enabled:
+ast-link:
+  [enabled]:
     true
