@@ -12,20 +12,24 @@ class LoggingAspect() {
     fun loggingServiceMethod() {
     }
 
-    @Before("loggingServiceMethod()")
+    @Pointcut("@within(com.astlink.spring.boot.starter.springbootstarterlogging.annotations.MustBeLogged)")
+    fun customLoggingServiceMethod() {
+    }
+
+    @Before("loggingServiceMethod()|| customLoggingServiceMethod()")
     fun logBeforeMethodCall(joinPoint: JoinPoint) {
         val methodName = joinPoint.signature.name
         logger.info { "Вызван метод: $methodName" }
     }
 
-    @AfterReturning("loggingServiceMethod()")
+    @AfterReturning("loggingServiceMethod()|| customLoggingServiceMethod()")
     fun logAfterReturningMethodCall(joinPoint: JoinPoint) {
         val methodName = joinPoint.signature.name
         logger.info { "$methodName\" метод был завершен" }
     }
 
     @AfterThrowing(
-        pointcut = "loggingServiceMethod()", throwing = "exception"
+        pointcut = "loggingServiceMethod()|| customLoggingServiceMethod()", throwing = "exception"
     )
     fun logAfterThrowing(joinPoint: JoinPoint, exception: Exception) {
         val methodName = joinPoint.signature.name
