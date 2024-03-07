@@ -19,13 +19,15 @@ class LoggingAspect() {
     @Before("loggingServiceMethod()|| customLoggingServiceMethod()")
     fun logBeforeMethodCall(joinPoint: JoinPoint) {
         val methodName = joinPoint.signature.name
-        logger.info { "Вызван метод: $methodName" }
+        val className = joinPoint.target.javaClass.simpleName
+        logger.info { "Вызван метод: $methodName из класса: $className" }
     }
 
     @AfterReturning("loggingServiceMethod()|| customLoggingServiceMethod()")
     fun logAfterReturningMethodCall(joinPoint: JoinPoint) {
         val methodName = joinPoint.signature.name
-        logger.info { "$methodName\" метод был завершен" }
+        val className = joinPoint.target.javaClass.simpleName
+        logger.info { "Метод $methodName из класса: $className был завершен" }
     }
 
     @AfterThrowing(
@@ -33,8 +35,9 @@ class LoggingAspect() {
     )
     fun logAfterThrowing(joinPoint: JoinPoint, exception: Exception) {
         val methodName = joinPoint.signature.name
+        val className = joinPoint.target.javaClass.simpleName
         logger.error {
-            "В методе $methodName выброшено исключение: [${exception::class}] ${exception.message}"
+            "В методе $methodName класса $className выброшено исключение: [${exception::class}] ${exception.message}"
         }
     }
 }

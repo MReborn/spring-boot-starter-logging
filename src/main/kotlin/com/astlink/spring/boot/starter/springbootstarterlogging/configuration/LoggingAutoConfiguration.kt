@@ -8,16 +8,17 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-@ConditionalOnProperty(prefix = "ast-link", value = ["enabled"], havingValue = "true")
+@ConditionalOnProperty(prefix = "astlink-aop-logging", value = ["enabled"], havingValue = "true")
 class LoggingAutoConfiguration {
-    companion object:KLogging()
+    companion object : KLogging()
+
     @Bean
     fun loggingAspect(): LoggingAspect {
         return LoggingAspect()
     }
 
     @PostConstruct
-    fun init(){
+    fun init() {
         logger.info { "LoggingAutoConfiguration initialized" }
     }
 
