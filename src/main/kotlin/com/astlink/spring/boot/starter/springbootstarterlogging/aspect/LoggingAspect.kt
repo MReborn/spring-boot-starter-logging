@@ -12,11 +12,11 @@ class LoggingAspect() {
     fun loggingServiceMethod() {
     }
 
-    @Pointcut("@within(com.astlink.spring.boot.starter.springbootstarterlogging.annotations.MustBeLogged)")
+    @Pointcut("@annotation(com.astlink.spring.boot.starter.springbootstarterlogging.annotations.MustBeLogged)")
     fun customLoggingServiceMethod() {
     }
 
-    @Before("loggingServiceMethod()|| customLoggingServiceMethod()")
+    @Before("loggingServiceMethod() || customLoggingServiceMethod()")
     fun logBeforeMethodCall(joinPoint: JoinPoint) {
         val methodName = joinPoint.signature.name
         val className = joinPoint.target.javaClass.simpleName

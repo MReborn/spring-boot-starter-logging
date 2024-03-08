@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-@ConditionalOnProperty(prefix = "astlink-aop-logging", value = ["enabled"], havingValue = "true")
+@ConditionalOnProperty(prefix = "logging", value = ["enabled"], havingValue = "true")
 class LoggingAutoConfiguration {
     companion object : KLogging()
 
